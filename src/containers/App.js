@@ -7,6 +7,11 @@ import GroceryStoreApp from "./GroceryStoreApp";
 import storeProvider from "../hoc/storeProvider";
 import configureStore from "../store/configureStore";
 
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from "react-apollo";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
+
 // get the tracker
 import trackingMiddleware from "../tracking/trackingMiddleware";
 import configuredTracker from "../tracking/configureTracker";
@@ -16,6 +21,11 @@ const store = configureStore({}, trackingMiddleware(configuredTracker));
 
 const provideStore = storeProvider(store);
 const GroceryStoreAppWithStore = provideStore(GroceryStoreApp);
+
+//create a new Apollo Client
+const client = new ApolloClient({
+  uri : "http://localhost:4050"
+})
 
 // Component to format JSON and display it!
 const DisplayJson = dataLayer => (
@@ -35,6 +45,7 @@ export default class App extends Component {
 
   componentWillMount() {
     configuredTracker.on("*", event => {
+      //Post to GraphQL Server
       toast.info(`Interaction Tracked: ${event.type} ${event.from ? `from ${event.from}` : ""}`);
       this.setState({
         dataLayer: window.dataLayer,
@@ -44,6 +55,7 @@ export default class App extends Component {
 
   render() {
     return (
+      <ApolloProvider client={client}>
       <div className="wrapper">
         <ToastContainer />
         <section>
@@ -56,6 +68,7 @@ export default class App extends Component {
           <DisplayJson data={this.state.dataLayer} />
         </section>
       </div>
+      </ApolloProvider>
     );
   }
 }

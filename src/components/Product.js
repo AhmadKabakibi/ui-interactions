@@ -29,7 +29,7 @@ const Product = ({
           </div>
           <div>
             <span className="Friend__price">
-              {price} €
+              €{price} 
             </span>
           </div>
         </div>
