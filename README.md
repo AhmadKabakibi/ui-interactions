@@ -24,3 +24,11 @@ http://localhost:4050/
 http://localhost:4050/graphql
 
 ```
+
+## Run UI 
+```sh
+npm run start
+
+App Running on port 3000
+http://localhost:3000/
+```
