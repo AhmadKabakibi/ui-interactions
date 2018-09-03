@@ -9,7 +9,8 @@ import configureStore from "../store/configureStore";
 
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from "react-apollo";
-import { Query } from "react-apollo";
+import { Mutation } from 'react-apollo';
+//import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
 // get the tracker
@@ -46,6 +47,17 @@ export default class App extends Component {
   componentWillMount() {
     configuredTracker.on("*", event => {
       //Post to GraphQL Server
+
+      /* const ADD_EVENT = gql`
+      mutation createEvent($type: String!, $productId: Int) {
+        createEvent(type: $event, productId: $productId) @client {
+          type
+          productId
+        }
+      }
+      `;
+      Mutation(ADD_EVENT)(this.props) */
+
       toast.info(`Interaction Tracked: ${event.type} ${event.from ? `from ${event.from}` : ""}`);
       this.setState({
         dataLayer: window.dataLayer,

@@ -1,15 +1,19 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const EventSchema = new Schema({
+const ViewSchema = new Schema({
+
     type : {
         type: String,
         required: true
     },
-    productId: {
+    pageName: {
+        type: String
+    },
+    productsCount: {
         type: Number
     }
 });
-const Event = mongoose.model('event', EventSchema)
+const View = mongoose.model('View', ViewSchema)
 
-module.exports = Event
+module.exports = View

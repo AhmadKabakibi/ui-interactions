@@ -5,22 +5,37 @@ const typeDefs = `
  type Event {
   _type: String!
   type: String!
-  data: String
+  productId: Int
+ }
+
+ type View {
+  _type: String!
+  type: String!
+  pageName: Int
+  productsCount: Int
  }
 
  type Query {
   getEvent(_type: String!): Event
   allEvents: [Event]
+  allViews: [View]
  }
 
  input EventInput {
   type: String!
-  data: String
+  productId: Int
+ }
+ 
+ input ViewInput {
+    type: String!
+    pageName: Int
+    productsCount: Int
  }
 
  type Mutation {
   createEvent(input: EventInput) : Event
- }
+  createView(input: ViewInput) : View
+ }  
 `;
 
 const schema = qlTools.makeExecutableSchema({

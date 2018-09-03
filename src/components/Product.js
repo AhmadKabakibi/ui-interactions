@@ -72,7 +72,7 @@ Product.propTypes = {
 
 const mapTrackingToProps = trackEvent => ({
   trackPurchaseProduct: (id, name, price) =>
-    trackEvent(purchaseEvent(id, name, price))
+  trackEvent(purchaseEvent(id, name, price))
 });
 
 const ProductWithTracking = withTracking(mapTrackingToProps)(Product)

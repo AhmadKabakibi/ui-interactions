@@ -1,4 +1,5 @@
 const Event = require("./models/event");
+const View = require("./models/view");
 
 const resolvers = {
     Query : {
@@ -12,7 +13,10 @@ const resolvers = {
     Mutation: {
         async createEvent(root, {data}) {
            return await Event.create(data);
-        }
+        },
+        async createView(root, {data}) {
+            return await View.create(data);
+         }
     }
 };
 
